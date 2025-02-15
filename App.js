@@ -15,42 +15,60 @@ const Parent =()=>{
   )
 };
 export default Parent;*/
-import React,{createContext,useContext} from "react";
-//create context to hold the data
-const DataContext=createContext()
-function App() {
-  const data = "Hello world";
-  return (<div>
-    <DataContext.Provider value={data}>
-      <User1/>
-    </DataContext.Provider>
-    {/* <Props/> */}
-   </div> 
-  );
-}
+/*import React, {useState, useEffect, useRef} from 'react';
 
-// User1 component
-function User1({ data }) {
-  return <User2 data={data} />;
-}
+function CounterWithPrev(){
+    const [count, setCount] = useState(0);
+    const prevCount = useRef();
+    //create a ref to store the previous value
 
-// User2 component
-function User2({ data }) {
-  return <User3 data={data} />;
-}
+    useEffect(()=>{
+        prevCount.current = count;
+    }, [count])
 
-// User3 component
-function User3({ data }) {
-  return <User4 data={data} />;
-}
-
-// User4 component
-function User4({ data }) {
-  
-    const data1=useContext(DataContext);
     return(
-      <div>{data1}</div>
+        <div>
+            <p>Current Counter: {count}</p>
+            <p>prevCount: {prevCount.current}</p>
+
+            <button onClick={()=>setCount(count+1)}>Increment</button>
+        </div>
+    )
+}
+export default CounterWithPrev;*/
+
+import React, { useReducer } from 'react';
+import appleFruit from './apple.jpg'; // Adjust the path if needed
+
+// reducer function to track number of apples
+function appleReduce(state = 3, action) {
+  switch (action.type) {
+    case 'ADD_APPLE':
+      return state + 1;
+    case 'EAT_APPLE':
+      return state - 1;
+    default:
+      return state;
+  }
+}
+
+function App() {
+  const [state, dispatch] = useReducer(appleReduce);
+
+  return (
+    <div style={{ padding: '20px', textAlign: 'center' }}>
+      <h1>Apple Counter</h1>
+      <div style={{ marginTop: '20px' }}>
+        <img src={appleFruit} alt="apple" width="50" height="50" />
+        <img src={appleFruit} alt="apple" width="50" height="50" />
+        <img src={appleFruit} alt="apple" width="50" height="50" />
+      </div>
+      <p>Number of apples: {state}</p>
+      <button onClick={() => dispatch({ type: 'ADD_APPLE' })}>ADD APPLE</button>
+      <button onClick={() => dispatch({ type: 'EAT_APPLE' })}>EAT APPLE</button>
+    </div>
   );
 }
+
 export default App;
 
