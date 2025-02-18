@@ -63,7 +63,7 @@ return(
 )
 }
 export default App;*/
-import React ,{useState}from "react";
+/*import React ,{useState}from "react";
 function App(){
   const[isHovered ,setIsHovered]=useState(false);
   const handleMouseEnter=()=>{
@@ -81,5 +81,20 @@ function App(){
 
   )
 }
-export default App;
+export default App;*/
 
+import React ,{useState} from "react";
+function App(){
+  const[Key,setKey]=useState("");
+  const handleKeyDown=(event)=>{
+    setKey(event.Key);
+  };
+  return(
+    <div className="app">
+      <h1> Welcome to Sai It Solutions</h1>
+      {Key &&<h2>Pressed Key:{Key} </h2>}
+      <input type="text" onKeyDown={handleKeyDown} placeholder="pressed here"/>
+    </div>
+  )
+}
+export default App;
